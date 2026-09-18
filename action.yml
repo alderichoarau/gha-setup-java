@@ -1,0 +1,21 @@
+name: "Setup Java"
+description: "JDK (temurin by default) with Maven dependency caching -- the toolchain every workflow builds with."
+
+inputs:
+  java-version:
+    description: "JDK version to install"
+    required: false
+    default: "21"
+  distribution:
+    description: "JDK distribution (actions/setup-java's `distribution` input)"
+    required: false
+    default: temurin
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-java@v6
+      with:
+        java-version: ${{ inputs.java-version }}
+        distribution: ${{ inputs.distribution }}
+        cache: maven
